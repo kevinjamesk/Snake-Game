@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake Game</title>
+</head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<body>
+    <p id="p1">Press ESC to Pause the game.</p>
+    <div id="arrow">
+        <p id="p2">PRESS</p>
+        <img src="arrowkeys.png" width="256px" height="170px" ></img>
+        <p id="p2">TO MOVE</p>
+    </div>
+    <div id="wrapper">
+        <b><input type="button" id="heading" value="Normal Mode">Normal Mode</input></b>
+    </div>
+    <canvas id="gameCanvas" width="500px" height="400px"></canvas>
+    <canvas id="scoreCanvas" width="200px" height="400px"></canvas>
+    
+    <div id="wrapper">
+        <input onclick="modeChange()" type="button" value="Too Easy? Click here for Hard Mode." id="button">Too Easy? Click here for Hard Mode.</input>
+    </div>
+</body>
+<script src="script.js">
+    
+</script>
+  
+</html>

@@ -1,0 +1,53 @@
+body{
+    background-color: black;
+}
+
+#gameCanvas{
+    margin-top: 2px;
+    margin-left: 2%;
+    border: 10px solid #222420;
+}
+
+#scoreCanvas{
+    border: 10px solid #222420;
+}
+
+#button, #heading{
+  border: none;
+  color: grey;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  background-color: #222420;
+}
+
+#button{
+margin-left: 37.5%;
+}
+
+#heading{
+    margin-left: 24%;
+}
+
+#arrow{
+    float: left;
+    margin-top: 10%;
+}
+
+p{
+    color: grey; 
+    margin-top: 10px;
+}
+
+#p1{
+    text-align: right;
+}
+
+#p2{
+    text-align: center;
+    color: grey;
+    
+}
