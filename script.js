@@ -1,5 +1,10 @@
 var snake = {
-  body: [[160, 180], [140, 180], [120, 180], [100, 180]],
+  body: [
+    [160, 180],
+    [140, 180],
+    [120, 180],
+    [100, 180]
+  ],
   dir: { x: 20, y: 0 }
 };
 var food = { x: 340, y: 180 };
@@ -8,10 +13,6 @@ var gameBox = { cell: 20, width: 500, height: 400 };
 var gameCanvas;
 var gameCtx;
 
-var scoreBox = { width: 200, height: 400 };
-var scoreCanvas;
-var scoreCtx;
-
 var LEFT = 37;
 var UP = 38;
 var RIGHT = 39;
@@ -19,7 +20,7 @@ var DOWN = 40;
 var PAUSE = 27;
 
 var key = RIGHT;
-var snakeSpeed = 120;
+var tickInterval = 120;
 
 var score = 0;
 var maxScore = 0;
@@ -28,24 +29,34 @@ gameCanvas = document.getElementById("gameCanvas");
 gameCtx = gameCanvas.getContext("2d");
 gameCtx.strokeStyle = "black";
 
-scoreCanvas = document.getElementById("scoreCanvas");
-scoreCtx = scoreCanvas.getContext("2d");
-scoreCtx.strokeStyle = "black";
-
 init();
 
 function init() {
   snake = {
-    body: [[160, 180], [140, 180], [120, 180], [100, 180]],
+    body: [
+      [160, 180],
+      [140, 180],
+      [120, 180],
+      [100, 180]
+    ],
     dir: { x: 20, y: 0 }
   };
   food = { x: 340, y: 180 };
   key = RIGHT;
   score = 0;
-  time = setInterval(repeat, snakeSpeed);
+  time = setInterval(repeat, tickInterval);
 }
 
 function repeat() {
+  drawSnake();
+  drawFood();
+  moveSnake();
+  growSnake();
+  printScore();
+  GameOver();
+}
+
+function drawSnake() {
   gameCtx.fillStyle = "#29577e";
   gameCtx.clearRect(0, 0, gameBox.width, gameBox.height);
   for (var i = 0; i < snake.body.length; i++) {
@@ -62,6 +73,15 @@ function repeat() {
       gameBox.cell
     );
   }
+}
+
+function drawFood() {
+  gameCtx.fillStyle = "#058c42";
+  gameCtx.fillRect(food.x, food.y, gameBox.cell, gameBox.cell);
+  gameCtx.strokeRect(food.x, food.y, gameBox.cell, gameBox.cell);
+}
+
+function moveSnake() {
   if (key == UP && snake.dir.y != 20) {
     snake.dir.x = 0;
     snake.dir.y = -20;
@@ -78,15 +98,15 @@ function repeat() {
     alert("Game Paused.");
     key = 0;
   }
+}
+
+function growSnake() {
   snake.body.unshift([
     snake.body[0][0] + snake.dir.x,
     snake.body[0][1] + snake.dir.y
   ]);
-  gameCtx.fillStyle = "#058c42";
-  gameCtx.fillRect(food.x, food.y, gameBox.cell, gameBox.cell);
-  gameCtx.strokeRect(food.x, food.y, gameBox.cell, gameBox.cell);
   if (snake.body[0][0] == food.x && snake.body[0][1] == food.y) {
-    if (snakeSpeed == 75) {
+    if (tickInterval == 75) {
       score += 2;
     } else {
       score += 1;
@@ -110,36 +130,12 @@ function repeat() {
   } else {
     snake.body.pop();
   }
-  Score();
-  GameOver();
 }
 
-function modeChange() {
-  var txt1 = document.getElementById("button");
-  var txt2 = document.getElementById("heading");
-  if (txt1.value == "Too Easy? Click here for Hard Mode.") {
-    txt1.value = "Click here to go back to Normal Mode.";
-    txt2.value = "Hard Mode";
-    snakeSpeed = 75;
-  } else {
-    txt1.value = "Too Easy? Click here for Hard Mode.";
-    txt2.value = "Normal Mode";
-    snakeSpeed = 120;
-  }
-  clearInterval(time);
-  init();
+function printScore() {
+  document.getElementById("Score").value = score;
+  document.getElementById("Best").value = maxScore;
 }
-
-function Score() {
-  scoreCtx.fillStyle = "#29577e";
-  scoreCtx.clearRect(0, 0, scoreBox.width, scoreBox.height);
-  scoreCtx.font = "bold 35px Helvetica";
-  scoreCtx.fillText("Score", 20, 130);
-  scoreCtx.fillText(score.toString(), 20, 170);
-  scoreCtx.fillText("Best", 20, 230);
-  scoreCtx.fillText(maxScore.toString(), 20, 270);
-}
-
 function GameOver() {
   lose = false;
   for (var i = 0; i < snake.body.length; i++) {
@@ -169,6 +165,22 @@ function GameOver() {
     clearInterval(time);
     init();
   }
+}
+
+function modeChange() {
+  var txt1 = document.getElementById("button");
+  var txt2 = document.getElementById("heading");
+  if (txt1.value == "Too Easy? Click here for Hard Mode.") {
+    txt1.value = "Click here to go back to Normal Mode.";
+    txt2.value = "Hard Mode";
+    tickInterval = 75;
+  } else {
+    txt1.value = "Too Easy? Click here for Hard Mode.";
+    txt2.value = "Normal Mode";
+    tickInterval = 120;
+  }
+  clearInterval(time);
+  init();
 }
 
 window.addEventListener(

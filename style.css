@@ -3,14 +3,13 @@ body{
 }
 
 #gameCanvas{
+    float: left;
     margin-top: 2px;
     margin-left: 2%;
     border: 10px solid #222420;
 }
 
-#scoreCanvas{
-    border: 10px solid #222420;
-}
+
 
 #button, #heading{
   border: none;
@@ -22,19 +21,31 @@ body{
   font-size: 15px;
   margin: 4px 2px;
   background-color: #222420;
+  margin-left: 41%;
+
 }
 
-#button{
-margin-left: 37.5%;
-}
 
 #heading{
-    margin-left: 24%;
+    margin-left: 17%;
 }
 
 #arrow{
     float: left;
     margin-top: 10%;
+    margin-left: 10%;
+}
+#score{
+    float: left;
+    margin-top: 10%;
+}
+#Score, #Best{
+    border: 4px solid #222420;
+    color: white;
+    background-color: black;
+    margin-left: 5%;
+    width: 33.33%;
+    pointer-events: none;
 }
 
 p{
@@ -47,7 +58,6 @@ p{
 }
 
 #p2{
-    text-align: center;
     color: grey;
-    
+    margin-left: 5%;    
 }

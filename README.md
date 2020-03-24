@@ -7,6 +7,3 @@ A game made using HTML, CSS, and Javscript.
 Just copy the repository with all the files to your local computer and open `snake.html`
 
 
-## Gameplay
-
-![](Snake-Game.gif)
